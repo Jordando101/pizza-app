@@ -5,13 +5,14 @@ import {Link} from "react-router-dom";
 const LandingPage = () => {
     return (
         <div>
-            <div id="titleId">Rubin's Pizza</div>
+            <h1 id="titleId" className="title">Rubin's Pizza</h1>
             <div>
-                <img id="pizzaIconId" src={pizzaLogoIcon}></img>
+                <img id="pizzaIconId" src={pizzaLogoIcon}
+                     className="logo"></img>
             </div>
             <div>
                 <Link to="/order">
-                    <button id="orderPizzaButtonId">Order a Pizza</button>
+                    <button id="orderPizzaButtonId" >Order a Pizza</button>
                 </Link>
             </div>
         </div>
