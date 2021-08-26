@@ -13,7 +13,7 @@ export function PizzaSizeDropdown(props) {
 
             {Object.keys(pizzaSizes).map( (size) =>{
                 return(
-                    <option value ={size}>
+                    <option id={'pizza-select-option-' + size} value ={size}>
                         {pizzaSizes[size]}
                     </option>
                 )

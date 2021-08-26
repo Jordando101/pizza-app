@@ -6,9 +6,11 @@ const LandingPage = () => {
     return (
         <div>
             <h1 id="titleId" className="title">Rubin's Pizza</h1>
+            <br/>
             <div>
                 <img id="pizzaIconId" src={pizzaLogoIcon}
                      className="logo"></img>
+                <br/>
             </div>
             <div>
                 <Link to="/order">

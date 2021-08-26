@@ -2,16 +2,23 @@ import React, {useState} from 'react';
 import pizzaLogoIcon from '../../assets/pizzaLogoIcon.png'
 import {PizzaSizeDropdown} from "../DropdownMenu/PizzaSizeDropdown";
 import {CrustTypeDropdown} from "../DropdownMenu/CrustTypeDropdown";
-import {PizzaToppingsCheckboxes} from "../ToppingsAndOptions/PizzaToppingsCheckboxes";
+import {PizzaToppingsCheckboxes} from "../Checkboxes/PizzaToppingsCheckboxes";
 import {pizzaCrusts, pizzaSizes, pizzaToppings} from '../../Utils/pizzaValues.js'
+import {Link} from "react-router-dom";
 
 
-const OrderingPage = () => {
+const OrderingPage = (props) => {
     const [pizzaSize, setPizzaSize] = useState("")
 
     const [pizzaCrust, setPizzaCrust] = useState("")
 
     const [pizzaTopping, setPizzaTopping] = useState([])
+
+    // let pizzaToBeOrdered = {
+    //     size: "temp",
+    //     crust: "",
+    //     toppings: []
+    // }
 
     const handlePizzaToppingChange = (toppingName) => {
         if (pizzaTopping.includes(toppingName)) {
@@ -21,7 +28,7 @@ const OrderingPage = () => {
                 }))
         } else {
             let tempArray = pizzaTopping.slice()
-                tempArray.push(toppingName)
+            tempArray.push(toppingName)
             setPizzaTopping(tempArray)
         }
     }
@@ -29,11 +36,17 @@ const OrderingPage = () => {
     return (
         <div>
             <h1 id="titleId" className="title">Rubin's Pizza</h1>
-            <div><img id="pizzaIconId" src={pizzaLogoIcon}
-                      className="logo"/></div>
+            <div>
+                <img id="pizzaIconId" src={pizzaLogoIcon}
+                     className="logo"/>
+            </div>
+            <br/>
             <div>
                 <div id="pizzaSizeId">Pizza Size
-                    <PizzaSizeDropdown handlePizzaSizeChange={(pizzaSizeValue) => setPizzaSize(pizzaSizeValue)}/>
+                    <PizzaSizeDropdown handlePizzaSizeChange={(pizzaSizeValue) => {
+                        setPizzaSize(pizzaSizeValue)
+                        // pizzaToBeOrdered.size=pizzaSizeValue
+                    }}/>
                 </div>
             </div>
             <br/>
@@ -46,20 +59,29 @@ const OrderingPage = () => {
                     (pizzaToppingsValue => handlePizzaToppingChange(pizzaToppingsValue))}/>
             </div>
             <br></br>
-            <div>Your Pizza So Far:</div>
+            <div className="orderConfirmation">Your Pizza So Far:</div>
             <br/>
             <div>
-                {pizzaSize !== "" && pizzaSizes[pizzaSize]}
+                {(pizzaSize=="" && pizzaCrust=="")?"No Pizza Built yet..." : (pizzaSize !== "" && pizzaSizes[pizzaSize])}
                 {" "}
                 {(pizzaCrust !== "" && pizzaCrusts[pizzaCrust])}
                 {pizzaSize !== "" && pizzaCrust !== "" && pizzaTopping != "" && (" topped with ")}
                 {pizzaTopping.map(
-                    (topping)=>{
-                        return(pizzaToppings[topping]+" ")
+                    (topping) => {
+                        return (pizzaToppings[topping] + " ")
                     }
                 )}
             </div>
-
+            <br/>
+            <div>
+                <Link to="/confirmYourOrder">
+                    <button id="confirmYourOrderButtonId"
+                            onClick={() =>
+                                props.handlePizzaSelected(pizzaSize, pizzaCrust, pizzaTopping)}
+                    > Finished Building My 'Za!
+                    </button>
+                </Link>
+            </div>
 
         </div>
     )
