@@ -10,6 +10,8 @@ const ConfirmYourOrderPage = (props) => {
     const submitInfo = (size, crust, toppings, email) => {
         console.log("submitInfo called")
         let body = JSON.stringify({
+            //Store the keys to the database; so the values
+            //below are the keys to the pizzaValues JSON objects
             pizzaSize: size,
             pizzaCrust: crust,
             pizzaToppings: toppings,

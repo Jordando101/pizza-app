@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import LandingPage from "./Components/LandingPage/LandingPage";
 import OrderingPage from "./Components/OrderingPage/OrderingPage";
 import ConfirmYourOrderPage from "./Components/ConfirmYourOrderPage/ConfirmYourOrderPage"
+import AdminPage from "./Components/AdminPage/AdminPage"
 
 import {
     BrowserRouter as Router,
@@ -47,6 +48,11 @@ function App() {
                 </Route>
                 <Route path="/orderConfirmationPage">
                     <OrderConfirmationPage/>
+                </Route>
+                <Route path="/admin">
+                    {//this manually needs to be directed for now
+                    }
+                    <AdminPage/>
                 </Route>
             </Switch>
         </Router>

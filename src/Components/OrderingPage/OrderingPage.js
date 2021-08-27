@@ -26,10 +26,7 @@ const OrderingPage = (props) => {
             setPizzaTopping(tempArray)
         }
     }
-
-
-
-
+    
     return (
         <div>
             <h1 id="titleId" className="title">Rubin's Pizza</h1>
@@ -84,8 +81,6 @@ const OrderingPage = (props) => {
 
         </div>
     )
-
-
 }
 
 export default OrderingPage;
