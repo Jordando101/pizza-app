@@ -2,6 +2,8 @@ import React from 'react'
 import pizzaLogoIcon from '../../assets/pizzaLogoIcon.png'
 
 const OrderConfirmationPage = () => {
+
+
     return (
         <div>
             <h1 id="titleId" className="title">

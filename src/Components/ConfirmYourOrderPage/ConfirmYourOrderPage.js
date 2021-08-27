@@ -1,9 +1,34 @@
-import React from 'react'
+import React, {useState} from 'react'
 import pizzaLogoIcon from '../../assets/pizzaLogoIcon.png'
 import {pizzaCrusts, pizzaSizes, pizzaToppings} from "../../Utils/pizzaValues"
 import {Link} from "react-router-dom";
 
 const ConfirmYourOrderPage = (props) => {
+
+    const [email, setEmail] = useState("")
+
+    const submitInfo = (size, crust, toppings, email) => {
+        console.log("submitInfo called")
+        let body = JSON.stringify({
+            pizzaSize: size,
+            pizzaCrust: crust,
+            pizzaToppings: toppings,
+            email: email
+        })
+        console.log("body made" + body)
+        fetch('http://localhost:8080/newOrder', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: body
+        }).then(response => {
+            console.log(response)
+            return response.json()
+        }).then(data => {
+            console.log('Success: ', data)
+        })
+    }
+
+
     return (
         <div>
             <h1 className="title" id="titleId">Rubin's Pizza</h1>
@@ -29,12 +54,15 @@ const ConfirmYourOrderPage = (props) => {
                     <br/>
                     <input type="email"
                            id="emailInputId"
-                           placeholder="YourName@RubinsPizza.com" required></input>
+                           placeholder="YourName@RubinsPizza.com"
+                           onChange={(e) => setEmail(e.target.value)}
+                           required></input>
                     <div><br/></div>
                     <Link to="/orderConfirmationPage">
                         <input type="submit" value="Finish Ordering!"
                                onClick={() => {
                                    //put in the HTTP request to submit
+                                   submitInfo(props.pizzaSize, props.pizzaCrust, props.pizzaTopping,email)
                                }}/>
                     </Link>
                 </form>

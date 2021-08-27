@@ -14,12 +14,6 @@ const OrderingPage = (props) => {
 
     const [pizzaTopping, setPizzaTopping] = useState([])
 
-    // let pizzaToBeOrdered = {
-    //     size: "temp",
-    //     crust: "",
-    //     toppings: []
-    // }
-
     const handlePizzaToppingChange = (toppingName) => {
         if (pizzaTopping.includes(toppingName)) {
             setPizzaTopping(pizzaTopping.slice().filter(
@@ -32,6 +26,9 @@ const OrderingPage = (props) => {
             setPizzaTopping(tempArray)
         }
     }
+
+
+
 
     return (
         <div>
@@ -62,7 +59,7 @@ const OrderingPage = (props) => {
             <div className="orderConfirmation">Your Pizza So Far:</div>
             <br/>
             <div>
-                {(pizzaSize=="" && pizzaCrust=="")?"No Pizza Built yet..." : (pizzaSize !== "" && pizzaSizes[pizzaSize])}
+                {(pizzaSize == "" && pizzaCrust == "") ? "No Pizza Built yet..." : (pizzaSize !== "" && pizzaSizes[pizzaSize])}
                 {" "}
                 {(pizzaCrust !== "" && pizzaCrusts[pizzaCrust])}
                 {pizzaSize !== "" && pizzaCrust !== "" && pizzaTopping != "" && (" topped with ")}
@@ -76,9 +73,11 @@ const OrderingPage = (props) => {
             <div>
                 <Link to="/confirmYourOrder">
                     <button id="confirmYourOrderButtonId"
-                            onClick={() =>
-                                props.handlePizzaSelected(pizzaSize, pizzaCrust, pizzaTopping)}
-                    > Finished Building My 'Za!
+                            onClick={() => {
+                                props.handlePizzaSelected(pizzaSize, pizzaCrust, pizzaTopping)
+
+                            }
+                            }> Finished Building My 'Za!
                     </button>
                 </Link>
             </div>
